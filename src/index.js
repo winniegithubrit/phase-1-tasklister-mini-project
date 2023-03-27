@@ -1,41 +1,23 @@
-/*document.addEventListener("DOMContentLoaded", () => {
-  // your code here
-  (document.querySelector('form')).addEventListener('submit', (e)=>{
-    e.preventDefault();
-    handleTodo(e);
-  })
-});*/
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  
-  const taskList = new TaskList();
-  
-
-  
-  const newTaskForm = document.getElementById("create-task-form");
-  const newTaskDescription = document.getElementById("new-task-description");
-  const newTaskPriority = document.getElementById("new-task-priority");
-
-  
-  const taskUl = document.getElementById("tasks");
-
-  const renderApp = () => (taskUl.innerHTML = taskList.renderTasks());
-
-
-  newTaskForm.addEventListener("submit", (e) => {
+  // your code here
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    taskList.createNewTask(newTaskDescription.value);
-    
-    e.target.reset();
-    renderApp();
-  });
+    let li = document.createElement("li");
+    const userInput = document.getElementById("new-task-description");
+    li.innerText = userInput.value;
+    let ul = document.getElementById("tasks");
+    ul.append(li);
+    const button = document.createElement("button");
+    button.innerText = "X";
+    const div = document.getElementById("list");
+    li.appendChild(button);
+    button.addEventListener("click", () =>{
+      li.remove();
+    });
 
-  taskUl.addEventListener("click", (e) => {
-    if (e.target.nodeName === "BUTTON") {
-      taskList.deleteTask(e.target.dataset.description);
-      renderApp();
-    }
   });
-});
+});  
+
+
+
